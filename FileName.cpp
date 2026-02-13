@@ -56,7 +56,18 @@ Position for_search_n(auto beg, auto end, Position N, auto Lambada) {
 	return -1;
 }
 
-
+template<class T,class D, class Position = std::intmax_t>
+Position for_search_n(const T& C, Position N, const D& V) {
+	Position A = 0;
+	for (auto it = std::begin(C); it != std::end(C); it++) {
+		if (N == A) { return -1; }
+		if (*it == V) {
+			return A;
+		}
+		A++;
+	}
+	return -1;
+}
 
 int main() {
 
@@ -72,5 +83,9 @@ int main() {
 	auto N2 = for_search_n(X, X + 8, 4, [](auto,auto& n) {return *n == 5; });
 
 	std::cout << N2 << std::endl;
+
+	auto N3 = for_search_n(X, 4, 3);
+
+	std::cout << N3 << std::endl;
 	return 0;
 }
